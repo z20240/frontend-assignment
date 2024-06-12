@@ -5,6 +5,13 @@ const port = 3000;
 // 使用 require 直接读取和解析 data.json 文件
 const mockData = require('./data.json');
 
+app.use((_req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
 app.get('/monthly-report/:month', (req, res) => {
   const { month } = req.params;
   const { partner_codes, game_ids } = req.query;
